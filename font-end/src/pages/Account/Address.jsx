@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Modal, message } from 'antd';
+import { Modal, message, Empty  } from 'antd';
 
 import {
   addAddressOnServer,
@@ -12,6 +12,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import { BiBookAdd } from 'react-icons/bi';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
 import { BsPencilSquare, BsTrash } from 'react-icons/bs';
+import { AiOutlineRetweet } from 'react-icons/ai'
 
 const Address = () => {
   const dispatch = useDispatch();
@@ -19,14 +20,23 @@ const Address = () => {
   const [userState, setUserState] = useState(user);
   const [isAddressForm, setIsAddressForm] = useState(false);
 
-
   const showModal = (setModal) => () => {
     setModal(true);
   };
   const closeModal = (setModal) => () => {
     setModal(false);
+    resetForm();
   };
 
+  const resetForm = () => {
+    setUserState(user);
+  };
+
+  const handleRefresh = () => {
+    setUserState(user);
+  };
+  
+  
   const handleChangeAddNew = (value, field) => {
     setUserState({
       ...userState,
@@ -55,10 +65,12 @@ const Address = () => {
       message.success('Thêm mới thành công');
       setUserState(updatedUser);
       setIsAddressForm(false);
+      resetForm(); 
     } catch (error) {
       message.error('Có lỗi xảy ra khi Thêm địa chỉ.');
     }
   };
+  
 
   const handleDeleteAddress = async (addressId) => {
     try {
@@ -76,7 +88,7 @@ const Address = () => {
     <>
       <div>
         <div className="w-full">
-          <h2 className="text-xl mb-2 font-bold">Sổ địa chỉ</h2>
+            <h2 className="text-xl mb-2 font-bold">Sổ địa chỉ</h2>
           <button
             onClick={showModal(setIsAddressForm)}
             className="flex justify-center mb-3 items-center w-full border-dashed border-[1px] p-5 bg-white shadow-sm hover:opacity-90 rounded-md"
@@ -86,61 +98,76 @@ const Address = () => {
                 style={{ color: 'rgb(59 130 246)', fontSize: '16px' }}
               />
             </span>
-            <div className="text-base text-blue-500">Thêm địa chỉ mới</div>
+            <div className="text-sm text-blue-500">Thêm địa chỉ mới</div>
           </button>
-          <ul>
-            {[...userState.shippingaddress] // tạo ra mảng mới mà không thay đổi cấu trúc mảng gốc
-              .sort((a, b) => b.defaultaddress - a.defaultaddress)
-              .map((address) => {
-                return (
-                  <li
-                    key={address._id}
-                    className="relative flex flex-col p-4 bg-white mb-2 shadow-sm rounded-md"
-                  >
-                    <div className="flex">
-                      <h3 className="uppercase font-bold">
-                        {address.receivername}
-                      </h3>
-                      {address.defaultaddress === true && (
-                        <div className="flex ml-3 items-center text-xs text-green-500">
-                          <AiOutlineCheckCircle />
-                          <span className="ml-1">Địa chỉ mặc định</span>
-                        </div>
-                      )}
-                    </div>
-                    <div>
-                      <span className="font-bold">Địa chỉ: </span>
-                      {address.detailaddress != '' &&
-                        address.detailaddress + ' - '}
-                      {address.street + ' - '}
-                      {address.ward + ' - '} {address.district + ' - '}
-                      {address.province}
-                    </div>
-                    <div>
-                      <span className="font-bold">Số điện thoại: </span>
-                      {address.phonenumber}
-                    </div>
-                    <div className="absolute right-0 top-0 p-6">
-                      <button className="flex items-center hover:underline text-blue-500 mb-3">
-                        <span className="mr-2">
-                          <BsPencilSquare />
-                        </span>
-                        Chỉnh sửa
-                      </button>
-                      <button
-                        onClick={() => handleDeleteAddress(address._id)}
-                        className="flex items-center hover:underline text-blue-500"
-                      >
-                        <span className="mr-2">
-                          <BsTrash />
-                        </span>
-                        Xóa
-                      </button>
-                    </div>
-                  </li>
-                );
-              })}
-          </ul>
+          <button 
+            onClick={handleRefresh}
+            className='flex items-center ml-auto my-2 text-base px-2 bg-white rounded-md text-blue-500' 
+          >
+              <AiOutlineRetweet/>
+              <span className='pl-2'>Tải lại</span>
+          </button>
+          {
+            userState.shippingaddress.length > 0 ? (
+              <ul>
+              {[...userState.shippingaddress] // tạo ra mảng mới mà không thay đổi cấu trúc mảng gốc
+                .sort((a, b) => b.defaultaddress - a.defaultaddress)
+                .map((address) => {
+                  return (
+                    <li
+                      key={address._id}
+                      className="relative flex flex-col p-4 bg-white mb-2 shadow-sm rounded-md"
+                    >
+                      <div className="flex">
+                        <h3 className="uppercase font-bold">
+                          {address.receivername}
+                        </h3>
+                        {address.defaultaddress === true && (
+                          <div className="flex ml-3 items-center text-xs text-green-500">
+                            <AiOutlineCheckCircle />
+                            <span className="ml-1">Địa chỉ mặc định</span>
+                          </div>
+                        )}
+                      </div>
+                      <div>
+                        <span className="font-bold">Địa chỉ: </span>
+                        {address.detailaddress != '' &&
+                          address.detailaddress + ' - '}
+                        {address.street + ' - '}
+                        {address.ward + ' - '} {address.district + ' - '}
+                        {address.province}
+                      </div>
+                      <div>
+                        <span className="font-bold">Số điện thoại: </span>
+                        {address.phonenumber}
+                      </div>
+                      <div className="absolute right-0 top-0 p-6">
+                        <button className="flex items-center hover:underline text-blue-500 mb-3">
+                          <span className="mr-2">
+                            <BsPencilSquare />
+                          </span>
+                          Chỉnh sửa
+                        </button>
+                        <button
+                          onClick={() => handleDeleteAddress(address._id)}
+                          className="flex items-center hover:underline text-blue-500"
+                        >
+                          <span className="mr-2">
+                            <BsTrash />
+                          </span>
+                          Xóa
+                        </button>
+                      </div>
+                    </li>
+                  );
+                })}
+            </ul>
+            ) : (
+              <div className='mt-20'>
+                <Empty cla description= {<p>Bạn không có địa chỉ giao hàng nào</p>} />
+              </div>
+            )
+          }
           <Modal
             width="800px"
             className="relative"
