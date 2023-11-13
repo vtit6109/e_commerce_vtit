@@ -161,8 +161,8 @@ const EditAccount = () => {
                         className="px-3 py-[10px] w-full"
                         format={dateFormat}
                         defaultValue={dayjs(userState.personalDetails?.birthday, dateFormat)}
-                        onChange={(date, dateString) =>
-                          handleChangePersonal(dayjs(dateString).format(dateFormat), 'birthday')
+                        onChange={(date) =>
+                          handleChangePersonal(dayjs(date).format(dateFormat), 'birthday')
                         }
                       />
                       </div>
@@ -201,7 +201,7 @@ const EditAccount = () => {
                           {
                             value: 'vn',
                             label: 'Việt Nam',
-                          },
+                          }
                         ]}
                       />
                     </li>

@@ -25,7 +25,7 @@ const AccountsDetail = () => {
           <span className="mr-4">
             {' '}
             <BsFillPersonVcardFill
-              style={{ fontSize: '20px', color: '#888888' }}
+              style={{ fontSize: '20px' }}
             />
           </span>{' '}
           <span>Thông tin tài khoản</span>{' '}
@@ -39,7 +39,7 @@ const AccountsDetail = () => {
           {' '}
           <span className="mr-4">
             {' '}
-            <FaLocationDot style={{ fontSize: '20px', color: '#888888' }} />
+            <FaLocationDot style={{ fontSize: '20px' }} />
           </span>{' '}
           <span>Địa chỉ giao hàng</span>{' '}
         </Link>
@@ -52,7 +52,7 @@ const AccountsDetail = () => {
           {' '}
           <span className="mr-4">
             {' '}
-            <FaThList style={{ fontSize: '20px', color: '#888888' }} />
+            <FaThList style={{ fontSize: '20px' }} />
           </span>{' '}
           <span>Quản lý đơn hàng</span>{' '}
         </Link>
@@ -65,7 +65,7 @@ const AccountsDetail = () => {
           {' '}
           <span className="mr-4">
             {' '}
-            <BsFillHeartFill style={{ fontSize: '20px', color: '#888888' }} />
+            <BsFillHeartFill style={{ fontSize: '20px' }} />
           </span>{' '}
           <span>Sản phẩm yêu thích</span>{' '}
         </Link>
@@ -78,7 +78,7 @@ const AccountsDetail = () => {
           {' '}
           <span className="mr-4">
             {' '}
-            <MdRateReview style={{ fontSize: '20px', color: '#888888' }} />
+            <MdRateReview style={{ fontSize: '20px' }} />
           </span>{' '}
           <span>Đánh giá của bạn</span>{' '}
         </Link>

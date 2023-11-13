@@ -16,6 +16,7 @@ import EditAccount from '../pages/Account/EditAccount';
 import Order from '../pages/Account/Order';
 import Review from '../pages/Account/Review';
 import Wishlist from '../pages/Account/Wishlist';
+import Cart from '../pages/Cart';
 
 const Loading = () => <div>Loading...</div>; // Trạng thái tải
 
@@ -82,7 +83,10 @@ const Routers = () => {
               },
             ],
           },
-          // Route "catch-all"
+          {
+            path : '/carts',
+            element : <Cart/>,
+          },
           {
             path: '*',
             element: products.length > 0 ? <PageNotFound /> : <Loading />,

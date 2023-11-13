@@ -1,18 +1,22 @@
-import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { Col, Row } from 'antd';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Empty } from 'antd';
-import { Rate } from 'antd';
+
+import { Col, Row } from 'antd';
+import { Empty, Rate } from 'antd';
 
 import { getAllProducts } from '../redux/slices/productsSlice';
 
 import SliderImgComponent from '../components/DetailProductComponents/SliderImgComponent';
 import RenderDetailsProduct from '../components/DetailProductComponents/RenderDetailsProduct';
 import AddToCartComponent from '../components/DetailProductComponents/AddToCartComponent';
+
+import { TbHeartPlus } from 'react-icons/tb'
+
 const ProductDetail = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
+  const user = useSelector((state) => state.user?.user);
   const { productId } = useParams();
 
   useEffect(() => {
@@ -37,8 +41,11 @@ const ProductDetail = () => {
       </Col>
       <Col span={8} className="flex flex-col w-[400px] px-4">
         <ul>
-          <li className="bg-white p-4 rounded-xl shadow-sm mb-2">
-            <div>
+          <li className="relative bg-white p-4 rounded-xl shadow-sm mb-2">
+            <div title='Thêm vào danh sách yêu thích' className='absolute top-0 right-0 cursor-pointer'>
+              <TbHeartPlus className='text-2xl m-3'/>
+            </div>
+            <div className='pb-2'>
               Thương Hiệu : <a className="text-blue-600">{product.brand}</a>
             </div>
             <div className="text-xl font-semibold">{product.productName}</div>
@@ -71,6 +78,7 @@ const ProductDetail = () => {
       <Col span={8} className="flex flex-col w-[400px] px-4">
         <AddToCartComponent
           productId={productId}
+          user = {!user ? '' : user}
           price={product.productPrice}
         />
       </Col>

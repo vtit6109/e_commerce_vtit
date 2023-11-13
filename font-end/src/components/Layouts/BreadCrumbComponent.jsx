@@ -32,6 +32,8 @@ const BreadcrumbComponent = () => {
 
         if (found) {
           acc.push({ path, title: item.name });
+        }  else if (part === 'carts') {
+          acc.push({ path, title: 'Giỏ hàng' });
         } else if (part === 'customer') {
           acc.push({ path, title: 'Tài Khoản' });
         } else if (path.startsWith('/customer')) {
@@ -49,7 +51,6 @@ const BreadcrumbComponent = () => {
       },
       [{ path: '/', title: 'Home' }],
     );
-
     return breadcrumbItems;
   }, [currentPath, categories]);
 

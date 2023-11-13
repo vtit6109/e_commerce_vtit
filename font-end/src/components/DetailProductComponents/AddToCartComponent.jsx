@@ -3,16 +3,16 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/slices/cartSlice';
 import { useState } from 'react';
 
-const AddToCartComponent = ({ productId, price }) => {
+const AddToCartComponent = ({ productId, price, user }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(price);
+  const userId = user._id
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ productId, quantity }));
-    alert('Sản phẩm đã được thêm vào giỏ hàng!');
-  };
-
+    dispatch(addToCart({ userId, productId }));
+    alert('Đã thêm vào giỏ hàng');
+};
   const handleBuyNow = () => {
     dispatch(addToCart({ productId, quantity }));
     alert('Tiếp tục quá trình thanh toán...');
@@ -89,5 +89,6 @@ const AddToCartComponent = ({ productId, price }) => {
 AddToCartComponent.propTypes = {
   productId: PropTypes.string,
   price: PropTypes.number,
+  user: PropTypes.object.isRequired,
 };
 export default AddToCartComponent;
