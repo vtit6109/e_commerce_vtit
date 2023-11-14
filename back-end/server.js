@@ -2,13 +2,25 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-
+const session = require('express-session');
+const passport = require('passport');
 const bodyParser = require('body-parser');
-const app = express();
 const cors = require('cors');
 const connectDB = require('./config/db/connectdb');
 
+// Khởi tạo Passport.js
+require('./config/auth/passport');
+
 connectDB();
+
+const app = express();
+
+// user session
+app.use(session({ secret: 'your session secret', resave: false, saveUninitialized: false }));
+
+// initial Passport và session Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(bodyParser.json());
 app.use(cors());
