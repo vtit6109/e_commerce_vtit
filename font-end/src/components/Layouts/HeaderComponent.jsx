@@ -6,7 +6,7 @@ import { SearchOutlined, HomeOutlined } from '@ant-design/icons';
 
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
-import LoginForm from '../modal/login/LoginForm';
+import LoginModal from '../modal/login/Login';
 
 const ButtonInputSearch = () => {
   return (
@@ -44,6 +44,7 @@ const ButtonInputSearch = () => {
 const HeaderComponent = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const isCartPage = location.pathname ==='/carts';
   return (
     <header>
       <Row className=" flex items-center text-gray-500">
@@ -67,11 +68,19 @@ const HeaderComponent = () => {
                 <HomeOutlined className="text-2xl" />
                 <span className="ml-2 text-base">Trang Chủ</span>
               </Link>
-              <LoginForm />
+              <LoginModal />
             </Col>
             <Col className="flex cursor-pointer px-1 items-end">
-              <ShoppingCartOutlined className="text-2xl " />
-              <span className="ml-2 text-base">Giỏ hàng</span>
+              <Link 
+                to={'/carts'}
+                className={`
+                ${isCartPage ? 'text-blue-500' :''}
+                `}
+              
+              >
+                <ShoppingCartOutlined className="text-2xl " />
+                <span className="ml-2 text-base">Giỏ hàng</span>
+              </Link>
             </Col>
           </Row>
         </Col>
