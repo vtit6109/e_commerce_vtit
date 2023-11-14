@@ -84,8 +84,8 @@ const Routers = () => {
             ],
           },
           {
-            path : '/carts',
-            element : <Cart/>,
+            path: '/carts',
+            element: <Cart />,
           },
           {
             path: '*',

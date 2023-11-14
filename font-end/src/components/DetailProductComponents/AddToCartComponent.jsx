@@ -7,12 +7,12 @@ const AddToCartComponent = ({ productId, price, user }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(price);
-  const userId = user._id
+  const userId = user._id;
 
   const handleAddToCart = () => {
     dispatch(addToCart({ userId, productId }));
     alert('Đã thêm vào giỏ hàng');
-};
+  };
   const handleBuyNow = () => {
     dispatch(addToCart({ productId, quantity }));
     alert('Tiếp tục quá trình thanh toán...');

@@ -24,9 +24,7 @@ const AccountsDetail = () => {
           {' '}
           <span className="mr-4">
             {' '}
-            <BsFillPersonVcardFill
-              style={{ fontSize: '20px' }}
-            />
+            <BsFillPersonVcardFill style={{ fontSize: '20px' }} />
           </span>{' '}
           <span>Thông tin tài khoản</span>{' '}
         </Link>

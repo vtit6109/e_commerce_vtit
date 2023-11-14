@@ -157,14 +157,20 @@ const EditAccount = () => {
                     <li className="flex mb-8 text-sm items-center">
                       <span className="w-[110px]">Ngày Sinh</span>
                       <div className="">
-                      <DatePicker
-                        className="px-3 py-[10px] w-full"
-                        format={dateFormat}
-                        defaultValue={dayjs(userState.personalDetails?.birthday, dateFormat)}
-                        onChange={(date) =>
-                          handleChangePersonal(dayjs(date).format(dateFormat), 'birthday')
-                        }
-                      />
+                        <DatePicker
+                          className="px-3 py-[10px] w-full"
+                          format={dateFormat}
+                          defaultValue={dayjs(
+                            userState.personalDetails?.birthday,
+                            dateFormat,
+                          )}
+                          onChange={(date) =>
+                            handleChangePersonal(
+                              dayjs(date).format(dateFormat),
+                              'birthday',
+                            )
+                          }
+                        />
                       </div>
                     </li>
                     <li className="flex mb-8 text-sm items-center">
@@ -201,7 +207,7 @@ const EditAccount = () => {
                           {
                             value: 'vn',
                             label: 'Việt Nam',
-                          }
+                          },
                         ]}
                       />
                     </li>

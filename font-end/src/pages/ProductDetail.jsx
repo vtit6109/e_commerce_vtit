@@ -11,7 +11,7 @@ import SliderImgComponent from '../components/DetailProductComponents/SliderImgC
 import RenderDetailsProduct from '../components/DetailProductComponents/RenderDetailsProduct';
 import AddToCartComponent from '../components/DetailProductComponents/AddToCartComponent';
 
-import { TbHeartPlus } from 'react-icons/tb'
+import { TbHeartPlus } from 'react-icons/tb';
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -42,10 +42,13 @@ const ProductDetail = () => {
       <Col span={8} className="flex flex-col w-[400px] px-4">
         <ul>
           <li className="relative bg-white p-4 rounded-xl shadow-sm mb-2">
-            <div title='Thêm vào danh sách yêu thích' className='absolute top-0 right-0 cursor-pointer'>
-              <TbHeartPlus className='text-2xl m-3'/>
+            <div
+              title="Thêm vào danh sách yêu thích"
+              className="absolute top-0 right-0 cursor-pointer"
+            >
+              <TbHeartPlus className="text-2xl m-3" />
             </div>
-            <div className='pb-2'>
+            <div className="pb-2">
               Thương Hiệu : <a className="text-blue-600">{product.brand}</a>
             </div>
             <div className="text-xl font-semibold">{product.productName}</div>
@@ -78,7 +81,7 @@ const ProductDetail = () => {
       <Col span={8} className="flex flex-col w-[400px] px-4">
         <AddToCartComponent
           productId={productId}
-          user = {!user ? '' : user}
+          user={!user ? '' : user}
           price={product.productPrice}
         />
       </Col>

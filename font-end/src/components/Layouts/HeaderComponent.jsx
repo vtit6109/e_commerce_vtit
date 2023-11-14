@@ -6,7 +6,7 @@ import { SearchOutlined, HomeOutlined } from '@ant-design/icons';
 
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
-import LoginForm from '../modal/LoginForm';
+import LoginForm from '../modal/login/LoginForm';
 
 const ButtonInputSearch = () => {
   return (

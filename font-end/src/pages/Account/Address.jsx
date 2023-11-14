@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Modal, message, Empty  } from 'antd';
+import { Modal, message, Empty } from 'antd';
 
 import {
   addAddressOnServer,
@@ -12,7 +12,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import { BiBookAdd } from 'react-icons/bi';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
 import { BsPencilSquare, BsTrash } from 'react-icons/bs';
-import { AiOutlineRetweet } from 'react-icons/ai'
+import { AiOutlineRetweet } from 'react-icons/ai';
 
 const Address = () => {
   const dispatch = useDispatch();
@@ -35,8 +35,7 @@ const Address = () => {
   const handleRefresh = () => {
     setUserState(user);
   };
-  
-  
+
   const handleChangeAddNew = (value, field) => {
     setUserState({
       ...userState,
@@ -47,7 +46,7 @@ const Address = () => {
 
   const handleSubmitAddnew = async (event) => {
     event.preventDefault();
-    const newAddress =  {
+    const newAddress = {
       receivername: userState.receivername,
       phonenumber: userState.phonenumber,
       street: userState.street,
@@ -65,12 +64,11 @@ const Address = () => {
       message.success('Thêm mới thành công');
       setUserState(updatedUser);
       setIsAddressForm(false);
-      resetForm(); 
+      resetForm();
     } catch (error) {
       message.error('Có lỗi xảy ra khi Thêm địa chỉ.');
     }
   };
-  
 
   const handleDeleteAddress = async (addressId) => {
     try {
@@ -88,7 +86,7 @@ const Address = () => {
     <>
       <div>
         <div className="w-full">
-            <h2 className="text-xl mb-2 font-bold">Sổ địa chỉ</h2>
+          <h2 className="text-xl mb-2 font-bold">Sổ địa chỉ</h2>
           <button
             onClick={showModal(setIsAddressForm)}
             className="flex justify-center mb-3 items-center w-full border-dashed border-[1px] p-5 bg-white shadow-sm hover:opacity-90 rounded-md"
@@ -100,16 +98,15 @@ const Address = () => {
             </span>
             <div className="text-sm text-blue-500">Thêm địa chỉ mới</div>
           </button>
-          <button 
+          <button
             onClick={handleRefresh}
-            className='flex items-center ml-auto my-2 text-base px-2 bg-white rounded-md text-blue-500' 
+            className="flex items-center ml-auto my-2 text-base px-2 bg-white rounded-md text-blue-500"
           >
-              <AiOutlineRetweet/>
-              <span className='pl-2'>Tải lại</span>
+            <AiOutlineRetweet />
+            <span className="pl-2">Tải lại</span>
           </button>
-          {
-            userState.shippingaddress.length > 0 ? (
-              <ul>
+          {userState.shippingaddress.length > 0 ? (
+            <ul>
               {[...userState.shippingaddress] // tạo ra mảng mới mà không thay đổi cấu trúc mảng gốc
                 .sort((a, b) => b.defaultaddress - a.defaultaddress)
                 .map((address) => {
@@ -162,12 +159,14 @@ const Address = () => {
                   );
                 })}
             </ul>
-            ) : (
-              <div className='mt-20'>
-                <Empty cla description= {<p>Bạn không có địa chỉ giao hàng nào</p>} />
-              </div>
-            )
-          }
+          ) : (
+            <div className="mt-20">
+              <Empty
+                cla
+                description={<p>Bạn không có địa chỉ giao hàng nào</p>}
+              />
+            </div>
+          )}
           <Modal
             width="800px"
             className="relative"
@@ -206,7 +205,6 @@ const Address = () => {
                       handleChangeAddNew(event, 'phonenumber')
                     }
                   />
-
                 </li>
                 <li className="flex items-center mb-3">
                   <span className="w-[200px]">Khu Phố/ Thôn/ Ấp:</span>

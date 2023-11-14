@@ -32,7 +32,7 @@ const BreadcrumbComponent = () => {
 
         if (found) {
           acc.push({ path, title: item.name });
-        }  else if (part === 'carts') {
+        } else if (part === 'carts') {
           acc.push({ path, title: 'Giỏ hàng' });
         } else if (part === 'customer') {
           acc.push({ path, title: 'Tài Khoản' });
