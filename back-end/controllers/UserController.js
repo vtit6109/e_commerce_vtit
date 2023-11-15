@@ -11,40 +11,6 @@ exports.getUser = async (req, res) => {
   res.json(user);
 };
 
-// exports.loginWithEmail = async (req, res) => {
-//   const { useremail, password } = req.body;
-//   const user = await User.findOne({ useremail });
-//   if (!user) {
-//     return res.status(400).json({ message: 'Người dùng không tồn tại.' });
-//   }
-//   if (password !== user.password) {
-//     return res.status(400).json({ message: 'Mật khẩu không chính xác.' });
-//   }
-//   res.json(user);
-// };
-
-// exports.checkPhoneNumber = async (req, res) => {
-//   const { phonenumber } = req.body;
-//   const user = await User.findOne({ phonenumber });
-//   if (!user) {
-//     return res.status(400).json({ message: 'Người dùng không tồn tại.' });
-//   }
-//   res.json(user);
-// };
-
-// exports.verifyCode = async (req, res) => {
-//   const { phonenumber, code } = req.body;
-//   const FAKE_VERIFICATION_CODE = '061099'
-//   if (code !== FAKE_VERIFICATION_CODE) {
-//     return res.status(400).json({ message: 'Mã xác thực không chính xác.' });
-//   }
-//   const user = await User.findOne({ phonenumber });
-//   if (!user) {
-//     return res.status(400).json({ message: 'Người dùng không tồn tại.' });
-//   }
-//   res.json(user);
-// };
-
 exports.updateUser = async (req, res) => {
   const updatedUser = await User.findByIdAndUpdate(req.params._id, req.body, { new: true }); 
   res.json(updatedUser);
