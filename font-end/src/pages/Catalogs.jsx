@@ -13,11 +13,12 @@ import { getCategories } from '../redux/slices/categoriesSlice';
 import { getCatalogProducts } from '../redux/slices/productsSlice';
 const Catalogs = () => {
   const dispatch = useDispatch();
+  const currentUrl = useLocation().pathname.split('/')[1];
+
   const catalogs = useSelector((state) => state.catalogs);
   const categories = useSelector((state) => state.categories);
   const products = useSelector((state) => state.products);
 
-  const currentUrl = useLocation().pathname.split('/')[1];
 
   useEffect(() => {
     dispatch(getCatalogs());
@@ -37,6 +38,7 @@ const Catalogs = () => {
 
   const [selectedBrands, setSelectedBrands] = useState([]);
 
+
   useEffect(() => {
     setSelectedBrands(allBrands);
   }, [allBrands]);
@@ -50,9 +52,9 @@ const Catalogs = () => {
     [products, selectedBrands],
   );
 
-  if (!catalogs || !products) {
-    return <div>Loading...</div>;
-  }
+if (!catalogs || !products) {
+  return <div>Loading...</div>;
+}
 
   return (
     <div className=" bg-slate-100 ">

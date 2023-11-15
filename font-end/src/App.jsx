@@ -1,10 +1,9 @@
-// import PropTypes from 'prop-types';
 import { Outlet } from 'react-router-dom';
 
 import './App.css';
 
-import Header from './components/Layouts/HeaderComponent';
-import Footer from './components/Layouts/FooterComponent';
+import Header from './components/Layouts/Header/HeaderComponent';
+import Footer from './components/Layouts/Footer/FooterComponent';
 import BreadcrumbComponent from '../src/components/Layouts/BreadCrumbComponent';
 
 const App = () => {

@@ -22,13 +22,15 @@ function Home() {
   const dispatch = useDispatch();
   const catalogs = useSelector((state) => state.catalogs);
   const products = useSelector((state) => state.products);
+  
   useEffect(() => {
     dispatch(getCatalogs());
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  const bestSellerSorted = [...products].sort((a, b) => b.sold - a.sold);
 
+  const bestSellerSorted = [...products].sort((a, b) => b.sold - a.sold);
+  
   const favoritesSorted = [...products]
     .filter((product) => product.favoriteStar > 3)
     .sort((a, b) => b.favoriteStar - a.favoriteStar)

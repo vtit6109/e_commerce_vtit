@@ -11,6 +11,7 @@ import { getCategoryProducts } from '../redux/slices/productsSlice';
 
 const Categories = () => {
   const dispatch = useDispatch();
+  
   const products = useSelector((state) => state.products);
 
   const currentUrlc = useLocation().pathname.split('/')[1];

@@ -15,9 +15,10 @@ import { TbHeartPlus } from 'react-icons/tb';
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
+  const { productId } = useParams();
+  
   const products = useSelector((state) => state.products);
   const user = useSelector((state) => state.user?.user);
-  const { productId } = useParams();
 
   useEffect(() => {
     dispatch(getAllProducts());

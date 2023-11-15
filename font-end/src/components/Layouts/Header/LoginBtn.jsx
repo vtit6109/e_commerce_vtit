@@ -1,41 +1,25 @@
+import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { message, Dropdown, Space, Typography, Avatar } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { UserOutlined, CaretDownOutlined } from '@ant-design/icons';
 
-import useModal from '../../../hooks/useModal';
-import LoginPhoneModal from './LoginPhoneModal';
-import VerificationModal from './VerificationModal';
-import LoginEmailModal from './LoginEmailModal';
 import { logoutUser } from '../../../redux/slices/userSlice';
 
-function Login() {
+
+function LoginButton({modal, openModal}) {
   const user = useSelector((state) => state.user?.user);
-  const { modal, openModal, closeModal } = useModal();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const handleNumberSuccess = () => {
-    closeModal();
-    openModal('verificationModal');
-  };
-
-  const handleEmailSuccess = () => {
-    closeModal();
-    navigate('/');
-  };
-
-  const handleVerificationSuccess = () => {
-    closeModal();
-    navigate('/');
-  };
 
   const handleLogout = () => {
     dispatch(logoutUser());
     navigate('/');
     message.success('Đã đăng xuất!');
   };
+
 
   const items = [
     {
@@ -98,26 +82,11 @@ function Login() {
           </div>
         </div>
       )}
-      <LoginPhoneModal
-        isOpen={modal === 'numberModal'}
-        onClose={closeModal}
-        onSuccess={handleNumberSuccess}
-        onOpenEmail={() => openModal('emailModal')}
-      />
-
-      <VerificationModal
-        isOpen={modal === 'verificationModal'}
-        onClose={closeModal}
-        onSuccess={handleVerificationSuccess}
-      />
-      
-      <LoginEmailModal
-        isOpen={modal === 'emailModal'}
-        onClose={closeModal}
-        onSuccess={handleEmailSuccess}
-      />
     </div>
   );
 }
-
-export default Login;
+LoginButton.propTypes ={
+  modal : PropTypes.func.isRequired,
+  openModal : PropTypes.func.isRequired,
+}
+export default LoginButton;

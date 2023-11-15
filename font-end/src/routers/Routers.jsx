@@ -16,7 +16,7 @@ import EditAccount from '../pages/Account/EditAccount';
 import Order from '../pages/Account/Order';
 import Review from '../pages/Account/Review';
 import Wishlist from '../pages/Account/Wishlist';
-import Cart from '../pages/Cart';
+import Cart from '../pages/Cart/Cart';
 
 const Loading = () => <div>Loading...</div>; // Trạng thái tải
 

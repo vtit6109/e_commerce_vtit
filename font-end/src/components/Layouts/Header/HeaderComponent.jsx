@@ -1,50 +1,19 @@
-// import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
-import { Col, Row, Input, Button } from 'antd';
-import { SearchOutlined, HomeOutlined } from '@ant-design/icons';
-
+import { Col, Row } from 'antd';
+import { HomeOutlined } from '@ant-design/icons';
+import useModal from '../../../hooks/useModal';
 import { ShoppingCartOutlined } from '@ant-design/icons';
-
-import LoginModal from '../modal/login/Login';
-
-const ButtonInputSearch = () => {
-  return (
-    <div className="flex items-center border-[1px] border-gray-300 rounded-lg  bg-white">
-      <span className=" opacity-75 text-[18px] mx-4">
-        <SearchOutlined />
-      </span>
-      <Input
-        bordered={false}
-        style={{ backgroundColor: '#ffff', borderRadius: '0px' }}
-        placeholder="Bạn tìm gì ..."
-        size="large"
-        allowClear
-      />
-      <span className="border-[1px] border-gray-300 h-[30px]"></span>
-      <Button
-        className="hover:text-blue-500"
-        style={{
-          display: 'flex',
-          borderRadius: '0px 8px 8px 0px',
-          border: 'none',
-          alignItems: 'center',
-          background: '#ffff',
-          fontWeight: '600',
-          color: '#9C9C9C',
-        }}
-        size={'large'}
-      >
-        Tìm kiếm
-      </Button>
-    </div>
-  );
-};
+import ButtonInputSearch from './ButtonInputSearch'
+import LoginModal from '../../modal/login/LoginModal';
+import LoginBtn from './LoginBtn'
 
 const HeaderComponent = () => {
   const location = useLocation();
+  const { modal, openModal, closeModal } = useModal();
+  
   const isHomePage = location.pathname === '/';
-  const isCartPage = location.pathname ==='/carts';
+  const isCartPage = location.pathname === '/carts';
+  
   return (
     <header>
       <Row className=" flex items-center text-gray-500">
@@ -68,15 +37,15 @@ const HeaderComponent = () => {
                 <HomeOutlined className="text-2xl" />
                 <span className="ml-2 text-base">Trang Chủ</span>
               </Link>
-              <LoginModal />
+              <LoginBtn openModal={openModal} modal={modal}/>
+              <LoginModal modal={modal} openModal={openModal}  closeModal={closeModal} path={'/'} />
             </Col>
             <Col className="flex cursor-pointer px-1 items-end">
-              <Link 
+              <Link
                 to={'/carts'}
                 className={`
-                ${isCartPage ? 'text-blue-500' :''}
+                ${isCartPage ? 'text-blue-500' : ''}
                 `}
-              
               >
                 <ShoppingCartOutlined className="text-2xl " />
                 <span className="ml-2 text-base">Giỏ hàng</span>

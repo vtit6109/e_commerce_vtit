@@ -1,15 +1,15 @@
 import { Col, Row } from 'antd';
 
-import momoIcon from '../../assets/icon/payMethodIcon/momo.png';
-import vtMoney from '../../assets/icon/payMethodIcon/vtmoney.png';
-import zalopay from '../../assets/icon/payMethodIcon/zalopay.png';
-import visa from '../../assets/icon/payMethodIcon/visa.png';
-import mastercard from '../../assets/icon/payMethodIcon/mastercard.png';
-import paypal from '../../assets/icon/payMethodIcon/paypal.jpg';
+import momoIcon from '../../../assets/icon/payMethodIcon/momo.png';
+import vtMoney from '../../../assets/icon/payMethodIcon/vtmoney.png';
+import zalopay from '../../../assets/icon/payMethodIcon/zalopay.png';
+import visa from '../../../assets/icon/payMethodIcon/visa.png';
+import mastercard from '../../../assets/icon/payMethodIcon/mastercard.png';
+import paypal from '../../../assets/icon/payMethodIcon/paypal.jpg';
 
-import facebook from '../../assets/icon/payMethodIcon/facebook.png';
-import zalo from '../../assets/icon/payMethodIcon/zalo.png';
-import youtobe from '../../assets/icon/payMethodIcon/youtobe.png';
+import facebook from '../../../assets/icon/payMethodIcon/facebook.png';
+import zalo from '../../../assets/icon/payMethodIcon/zalo.png';
+import youtobe from '../../../assets/icon/payMethodIcon/youtobe.png';
 
 const FooterComponent = () => {
   return (
