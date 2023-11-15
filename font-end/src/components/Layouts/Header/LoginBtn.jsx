@@ -86,7 +86,7 @@ function LoginButton({modal, openModal}) {
   );
 }
 LoginButton.propTypes ={
-  modal : PropTypes.func.isRequired,
+  modal : PropTypes.string,
   openModal : PropTypes.func.isRequired,
 }
 export default LoginButton;

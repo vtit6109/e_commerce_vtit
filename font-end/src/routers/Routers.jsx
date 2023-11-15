@@ -17,7 +17,7 @@ import Order from '../pages/Account/Order';
 import Review from '../pages/Account/Review';
 import Wishlist from '../pages/Account/Wishlist';
 import Cart from '../pages/Cart/Cart';
-
+import Test from '../test'
 const Loading = () => <div>Loading...</div>; // Trạng thái tải
 
 const Routers = () => {
@@ -86,6 +86,10 @@ const Routers = () => {
           {
             path: '/carts',
             element: <Cart />,
+          },
+          {
+            path: '/test',
+            element: <Test />,
           },
           {
             path: '*',

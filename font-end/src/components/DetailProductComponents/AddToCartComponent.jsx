@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/slices/cartSlice';
 import { useState } from 'react';
+import { message } from 'antd';
 
 const AddToCartComponent = ({ productId, price, user }) => {
   const dispatch = useDispatch();
@@ -11,7 +12,11 @@ const AddToCartComponent = ({ productId, price, user }) => {
 
   const handleAddToCart = () => {
     dispatch(addToCart({ userId, productId }));
-    alert('Đã thêm vào giỏ hàng');
+    if(!user) {
+      message.error('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng')
+    }else {
+      message.success('Đã thêm sản phẩm vào giỏ hàng')
+    }
   };
   const handleBuyNow = () => {
     dispatch(addToCart({ productId, quantity }));

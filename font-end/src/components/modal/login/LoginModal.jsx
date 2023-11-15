@@ -4,7 +4,7 @@ import LoginPhoneComponent from './LoginPhoneComponent';
 import VerificationComponent from './VerificationComponent';
 import LoginEmailComponent from './LoginEmailCompoent';
 
-function Login({modal, openModal, closeModal, path}) {
+const Login = ({modal, openModal, closeModal, path}) => {
   const navigate = useNavigate();
 
   const handleNumberSuccess = () => {
@@ -46,7 +46,7 @@ function Login({modal, openModal, closeModal, path}) {
   );
 }
 Login.propTypes ={
-  modal : PropTypes.func.isRequired,
+  modal : PropTypes.string,
   openModal : PropTypes.func.isRequired,
   closeModal : PropTypes.func.isRequired,
   path: PropTypes.string
