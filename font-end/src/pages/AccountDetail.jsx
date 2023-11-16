@@ -6,11 +6,11 @@ import { FaLocationDot } from 'react-icons/fa6';
 import { FaThList } from 'react-icons/fa';
 import { MdRateReview } from 'react-icons/md';
 
-import EditAccount from './EditAccount';
-import Address from './Address';
-import Order from './Order';
-import Wishlist from './Wishlist';
-import Review from './Review';
+import EditAccount from '../components/AccountDetail/EditAccount';
+import Address from '../components/AccountDetail/Address';
+import Order from '../components/AccountDetail/Order';
+import Wishlist from '../components/AccountDetail/Wishlist';
+import Review from '../components/AccountDetail/Review';
 
 const AccountsDetail = () => {
   const location = useLocation();

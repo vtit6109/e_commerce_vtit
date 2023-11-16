@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import LoginPhoneComponent from './LoginPhoneComponent';
-import VerificationComponent from './VerificationComponent';
-import LoginEmailComponent from './LoginEmailCompoent';
+import LoginPhone from './LoginPhone';
+import Verification from './Verification';
+import LoginEmail from './LoginEmail';
 
-const Login = ({modal, openModal, closeModal, path}) => {
+const Login = ({ modal, openModal, closeModal, path }) => {
   const navigate = useNavigate();
 
   const handleNumberSuccess = () => {
@@ -24,31 +24,31 @@ const Login = ({modal, openModal, closeModal, path}) => {
 
   return (
     <div>
-      <LoginPhoneComponent
+      <LoginPhone
         isOpen={modal === 'numberModal'}
         onClose={closeModal}
         onSuccess={handleNumberSuccess}
         onOpenEmail={() => openModal('emailModal')}
       />
 
-      <VerificationComponent
+      <Verification
         isOpen={modal === 'verificationModal'}
         onClose={closeModal}
         onSuccess={handleVerificationSuccess}
       />
 
-      <LoginEmailComponent
+      <LoginEmail
         isOpen={modal === 'emailModal'}
         onClose={closeModal}
         onSuccess={handleEmailSuccess}
       />
     </div>
   );
-}
-Login.propTypes ={
-  modal : PropTypes.string,
-  openModal : PropTypes.func.isRequired,
-  closeModal : PropTypes.func.isRequired,
-  path: PropTypes.string
-}
+};
+Login.propTypes = {
+  modal: PropTypes.string,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  path: PropTypes.string,
+};
 export default Login;

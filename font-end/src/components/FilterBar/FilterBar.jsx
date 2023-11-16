@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import BrandCheckListComponent from './BrandCheckListComponent';
+import BrandCheckListComponent from './BrandCheckList';
 
 const FilterBarComponet = ({ data, onBrandFilter }) => {
   return (

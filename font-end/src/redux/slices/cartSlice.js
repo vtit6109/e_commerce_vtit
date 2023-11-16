@@ -19,9 +19,41 @@ export const getCart = createAsyncThunk(
 
 export const addToCart = createAsyncThunk(
   '/cart/addToCart',
+  async ({ userId, productId, quantity }, { rejectWithValue }) => {
+    try {
+      const response = await api.post(`/addToCart/${userId}`, {
+        productId,
+        quantity,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+export const removeFromCart = createAsyncThunk(
+  '/cart/removeFromCart',
   async ({ userId, productId }, { rejectWithValue }) => {
     try {
-      const response = await api.post(`/addToCart/${userId}`, { productId });
+      const response = await api.post(`/removeFromCart/${userId}`, {
+        productId,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+export const updateQuantity = createAsyncThunk(
+  '/cart/updateQuantity',
+  async ({ userId, productId, quantity }, { rejectWithValue }) => {
+    try {
+      const response = await api.post(`/updateQuantity/${userId}`, {
+        productId,
+        quantity,
+      });
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -38,6 +70,12 @@ export const cartSlice = createSlice({
       state.cart = action.payload;
     });
     builder.addCase(addToCart.fulfilled, (state, action) => {
+      state.cart = action.payload;
+    });
+    builder.addCase(removeFromCart.fulfilled, (state, action) => {
+      state.cart = action.payload;
+    });
+    builder.addCase(updateQuantity.fulfilled, (state, action) => {
       state.cart = action.payload;
     });
   },

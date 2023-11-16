@@ -53,3 +53,7 @@ input[type='number'] {
 input:focus {
   outline: none;
 }
+
+.autoWidth {
+  white-space: nowrap
+}

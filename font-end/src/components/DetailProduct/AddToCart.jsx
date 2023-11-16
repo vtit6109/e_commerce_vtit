@@ -11,15 +11,15 @@ const AddToCartComponent = ({ productId, price, user }) => {
   const userId = user._id;
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ userId, productId }));
-    if(!user) {
-      message.error('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng')
-    }else {
-      message.success('Đã thêm sản phẩm vào giỏ hàng')
+    dispatch(addToCart({ userId, productId, quantity: quantity }));
+    if (!user) {
+      message.error('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng');
+    } else {
+      message.success('Đã thêm sản phẩm vào giỏ hàng');
     }
   };
   const handleBuyNow = () => {
-    dispatch(addToCart({ productId, quantity }));
+    dispatch(addToCart({ productId, quantity: quantity }));
     alert('Tiếp tục quá trình thanh toán...');
   };
 

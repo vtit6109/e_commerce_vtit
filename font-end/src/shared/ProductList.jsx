@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Pagination } from 'antd';
 import { Empty } from 'antd';
 
-import CardComponent from '../components/CardComponent';
+import Card from './Card';
 
 const ProductListComponent = ({ data, itemsPerPage }) => {
   // Add pagination state
@@ -19,7 +19,7 @@ const ProductListComponent = ({ data, itemsPerPage }) => {
       {currentItems.length > 0 ? (
         <>
           <div className="grid justify-center gap-x-2 gap-y-5 grid-cols-6 m-4 p-4 border-[1px] border-solid rounded-[10px]">
-            <CardComponent productItems={currentItems} />
+            <Card productItems={currentItems} />
           </div>
           <div className="flex justify-center py-3">
             <Pagination

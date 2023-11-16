@@ -8,7 +8,7 @@ import {
   PlusCircleOutlined,
 } from '@ant-design/icons';
 
-import CardComponent from '../CardComponent';
+import Card from '../../shared/Card';
 const ProductShowMoreLess = ({ data }) => {
   const [numProductsToShow, setNumProductsToShow] = useState(6);
   const [showLessButton, setShowLessButton] = useState(false);
@@ -30,7 +30,7 @@ const ProductShowMoreLess = ({ data }) => {
           maxHeight: `${Math.ceil(numProductsToShow / 6) * 363}px`,
         }}
       >
-        <CardComponent productItems={data.slice(0, numProductsToShow)} />
+        <Card productItems={data.slice(0, numProductsToShow)} />
         {data.length > 11 && (
           <Link
             to=""

@@ -7,8 +7,8 @@ import { RiseOutlined, CheckOutlined, LikeOutlined } from '@ant-design/icons';
 import { getCatalogs } from '../redux/slices/catalogsSlice';
 import { getAllProducts } from '../redux/slices/productsSlice';
 
-import MenuComponent from '../components/MenuComponent';
-import Carousel from '../components/CarouselComponent';
+import Menu from '../shared/Menu';
+import Carousel from '../shared/Carousel';
 import ProductCarousel from '../components/ProductDisplay/ProductCarousel';
 import ProductShowMoreLess from '../components/ProductDisplay/ProductShowMoreLess';
 
@@ -22,15 +22,14 @@ function Home() {
   const dispatch = useDispatch();
   const catalogs = useSelector((state) => state.catalogs);
   const products = useSelector((state) => state.products);
-  
+
   useEffect(() => {
     dispatch(getCatalogs());
     dispatch(getAllProducts());
   }, [dispatch]);
 
-
   const bestSellerSorted = [...products].sort((a, b) => b.sold - a.sold);
-  
+
   const favoritesSorted = [...products]
     .filter((product) => product.favoriteStar > 3)
     .sort((a, b) => b.favoriteStar - a.favoriteStar)
@@ -45,11 +44,7 @@ function Home() {
       <Row className="">
         <Col className="w-[230px] px-4" span={4}>
           <div className="">
-            <MenuComponent
-              title={'Danh Mục'}
-              data={catalogs}
-              pathType={'catalog'}
-            />
+            <Menu title={'Danh Mục'} data={catalogs} pathType={'catalog'} />
           </div>
         </Col>
         <Col className="" span={20}>

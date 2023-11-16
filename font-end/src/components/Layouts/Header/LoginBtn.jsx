@@ -7,8 +7,7 @@ import { UserOutlined, CaretDownOutlined } from '@ant-design/icons';
 
 import { logoutUser } from '../../../redux/slices/userSlice';
 
-
-function LoginButton({modal, openModal}) {
+function LoginButton({ modal, openModal }) {
   const user = useSelector((state) => state.user?.user);
 
   const navigate = useNavigate();
@@ -19,7 +18,6 @@ function LoginButton({modal, openModal}) {
     navigate('/');
     message.success('Đã đăng xuất!');
   };
-
 
   const items = [
     {
@@ -85,8 +83,8 @@ function LoginButton({modal, openModal}) {
     </div>
   );
 }
-LoginButton.propTypes ={
-  modal : PropTypes.string,
-  openModal : PropTypes.func.isRequired,
-}
+LoginButton.propTypes = {
+  modal: PropTypes.string,
+  openModal: PropTypes.func.isRequired,
+};
 export default LoginButton;

@@ -4,14 +4,14 @@ import { useLocation } from 'react-router-dom';
 
 import { Col, Row } from 'antd';
 
-import FilterBarComponet from '../components/FilterBarComponet/FilterBarComponet';
-import ProductListComponent from '../components/ProductListComponent';
+import ProductList from '../shared/ProductList';
+import FilterBarComponet from '../components/FilterBar/FilterBar';
 
 import { getCategoryProducts } from '../redux/slices/productsSlice';
 
 const Categories = () => {
   const dispatch = useDispatch();
-  
+
   const products = useSelector((state) => state.products);
 
   const currentUrlc = useLocation().pathname.split('/')[1];
@@ -57,7 +57,7 @@ const Categories = () => {
           />
         </Col>
         <Col className="rounded-[10px] shadow-sm bg-white" span={20}>
-          <ProductListComponent itemsPerPage={6} data={filteredProducts} />
+          <ProductList itemsPerPage={6} data={filteredProducts} />
         </Col>
       </Row>
     </div>

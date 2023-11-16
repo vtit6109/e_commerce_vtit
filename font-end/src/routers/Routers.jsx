@@ -10,15 +10,16 @@ import PageNotFound from '../pages/PageNotFound';
 import Catalogs from '../pages/Catalogs';
 import Categories from '../pages/Categories';
 import ProductDetail from '../pages/ProductDetail';
-import AccountsDetail from '../pages/Account/AccountsDetail';
-import Address from '../pages/Account/Address';
-import EditAccount from '../pages/Account/EditAccount';
-import Order from '../pages/Account/Order';
-import Review from '../pages/Account/Review';
-import Wishlist from '../pages/Account/Wishlist';
-import Cart from '../pages/Cart/Cart';
-import Test from '../test'
-const Loading = () => <div>Loading...</div>; // Trạng thái tải
+import AccountsDetail from '../pages/AccountDetail';
+import Address from '../components/AccountDetail/Address';
+import EditAccount from '../components/AccountDetail/EditAccount';
+import Order from '../components/AccountDetail/Order';
+import Review from '../components/AccountDetail/Review';
+import Wishlist from '../components/AccountDetail/Wishlist';
+import Carts from '../pages/Carts';
+import TestZone from '../TestZone';
+
+const Loading = () => <div>Loading...</div>;
 
 const Routers = () => {
   const dispatch = useDispatch();
@@ -85,11 +86,11 @@ const Routers = () => {
           },
           {
             path: '/carts',
-            element: <Cart />,
+            element: <Carts />,
           },
           {
             path: '/test',
-            element: <Test />,
+            element: <TestZone />,
           },
           {
             path: '*',

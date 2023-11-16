@@ -1,19 +1,25 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Col, Row } from 'antd';
-import { HomeOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
+
 import useModal from '../../../hooks/useModal';
+
+import { Col, Row, Badge } from 'antd';
+import { HomeOutlined } from '@ant-design/icons';
 import { ShoppingCartOutlined } from '@ant-design/icons';
-import ButtonInputSearch from './ButtonInputSearch'
-import LoginModal from '../../modal/login/LoginModal';
-import LoginBtn from './LoginBtn'
+
+import ButtonInputSearch from './ButtonInputSearch';
+import LoginModal from '../../modal/login/Login';
+import LoginBtn from './LoginBtn';
 
 const HeaderComponent = () => {
   const location = useLocation();
   const { modal, openModal, closeModal } = useModal();
-  
+  const cart = useSelector((state) => state.cart.cart);
+  const cartQty = cart && cart.products ? cart.products.length : 0;
+
   const isHomePage = location.pathname === '/';
   const isCartPage = location.pathname === '/carts';
-  
+
   return (
     <header>
       <Row className=" flex items-center text-gray-500">
@@ -37,19 +43,26 @@ const HeaderComponent = () => {
                 <HomeOutlined className="text-2xl" />
                 <span className="ml-2 text-base">Trang Chủ</span>
               </Link>
-              <LoginBtn openModal={openModal} modal={modal}/>
-              <LoginModal modal={modal} openModal={openModal}  closeModal={closeModal} path={'/'} />
+              <LoginBtn openModal={openModal} modal={modal} />
+              <LoginModal
+                modal={modal}
+                openModal={openModal}
+                closeModal={closeModal}
+                path={'/'}
+              />
             </Col>
             <Col className="flex cursor-pointer px-1 items-end">
-              <Link
-                to={'/carts'}
-                className={`
+              <Badge count={cartQty} size='small'>
+                <Link
+                  to={'/carts'}
+                  className={`
                 ${isCartPage ? 'text-blue-500' : ''}
                 `}
-              >
-                <ShoppingCartOutlined className="text-2xl " />
-                <span className="ml-2 text-base">Giỏ hàng</span>
-              </Link>
+                >
+                  <ShoppingCartOutlined className="text-2xl " />
+                  <span className="ml-2 text-base">Giỏ hàng</span>
+                </Link>
+              </Badge>
             </Col>
           </Row>
         </Col>

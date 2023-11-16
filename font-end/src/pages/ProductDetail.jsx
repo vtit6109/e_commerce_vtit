@@ -7,16 +7,16 @@ import { Empty, Rate } from 'antd';
 
 import { getAllProducts } from '../redux/slices/productsSlice';
 
-import SliderImgComponent from '../components/DetailProductComponents/SliderImgComponent';
-import RenderDetailsProduct from '../components/DetailProductComponents/RenderDetailsProduct';
-import AddToCartComponent from '../components/DetailProductComponents/AddToCartComponent';
+import SliderImgComponent from '../components/DetailProduct/SliderImage';
+import RenderDetailsProduct from '../components/DetailProduct/RenderDetailsProduct';
+import AddToCartComponent from '../components/DetailProduct/AddToCart';
 
 import { TbHeartPlus } from 'react-icons/tb';
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
-  
+
   const products = useSelector((state) => state.products);
   const user = useSelector((state) => state.user?.user);
 

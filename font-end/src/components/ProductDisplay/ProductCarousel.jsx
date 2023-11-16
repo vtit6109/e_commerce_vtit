@@ -7,7 +7,7 @@ import {
   PlusCircleOutlined,
 } from '@ant-design/icons';
 
-import CardComponent from '../CardComponent';
+import Card from '../../shared/Card';
 
 const ProductCarousel = ({ data }) => {
   const [productIndex, setProductIndex] = useState(0);
@@ -31,7 +31,7 @@ const ProductCarousel = ({ data }) => {
           />
         )}
 
-        <CardComponent
+        <Card
           productItems={data.slice(productIndex, productIndex + displayCount)}
         />
         {productIndex + displayCount >= data.length && data.length > 6 && (
