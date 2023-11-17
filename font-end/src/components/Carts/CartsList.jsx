@@ -10,7 +10,6 @@ import { Table } from 'antd';
 import {FaCheckCircle} from 'react-icons/fa'
 import {  CiTrash } from 'react-icons/ci';
 
-
 const CartsList = ( { userId } ) => {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart.cart);
@@ -52,7 +51,7 @@ const CartsList = ( { userId } ) => {
       align: 'center',
       render: (text) => (
         <div className='font-semibold'>
-          <span className='mr-1'>{text.toLocaleString('vn')}</span>
+          <span className='mr-1'>{text?.toLocaleString('vn')}</span>
           <span>vnđ</span>
         </div>
       )
@@ -93,7 +92,7 @@ const CartsList = ( { userId } ) => {
       align: 'center',
       render: (text) => (
         <div className='text-red-500 font-semibold'>
-          <span className='mr-1'>{text.toLocaleString('vn')}</span>
+          <span className='mr-1'>{text?.toLocaleString('vn')}</span>
           <span>vnđ</span>
         </div>
       )
@@ -121,7 +120,7 @@ const CartsList = ( { userId } ) => {
       product: item.productId.productName,
       active: item.productId.active,
       url: `/${item.productId?.category?.catalog?.url}/${item.productId?.category?.url}/${item.productId?._id}`,
-      imgUrl: item.productId.imgUrl[0],
+      imgUrl: item?.productId?.imgUrl?.[0],
       price: item.productId.productPrice,
       qty: item.quantity,
       amount: item.productId.productPrice * item.quantity,

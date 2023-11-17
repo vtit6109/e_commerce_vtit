@@ -18,6 +18,7 @@ const AddToCartComponent = ({ productId, price, user }) => {
       message.success('Đã thêm sản phẩm vào giỏ hàng');
     }
   };
+  
   const handleBuyNow = () => {
     dispatch(addToCart({ productId, quantity: quantity }));
     alert('Tiếp tục quá trình thanh toán...');
