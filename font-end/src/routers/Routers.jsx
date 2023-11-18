@@ -17,7 +17,7 @@ import Order from '../components/AccountDetail/Order';
 import Review from '../components/AccountDetail/Review';
 import Wishlist from '../components/AccountDetail/Wishlist';
 import Carts from '../pages/Carts';
-import TestZone from '../TestZone';
+// import TestZone from '../TestZone';
 
 const Loading = () => <div>Loading...</div>;
 
@@ -88,10 +88,10 @@ const Routers = () => {
             path: '/carts',
             element: <Carts />,
           },
-          {
-            path: '/test',
-            element: <TestZone />,
-          },
+          // {
+          //   path: '/test',
+          //   element: <TestZone />,
+          // },
           {
             path: '*',
             element: products.length > 0 ? <PageNotFound /> : <Loading />,
