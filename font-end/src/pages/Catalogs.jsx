@@ -15,9 +15,9 @@ const Catalogs = () => {
   const dispatch = useDispatch();
   const currentUrl = useLocation().pathname.split('/')[1];
 
-  const catalogs = useSelector((state) => state.catalogs);
-  const categories = useSelector((state) => state.categories);
-  const products = useSelector((state) => state.products);
+  const catalogs = useSelector((state) => state.catalogs.data);
+  const categories = useSelector((state) => state.categories.data);
+  const products = useSelector((state) => state.products.data);
 
   useEffect(() => {
     dispatch(getCatalogs());

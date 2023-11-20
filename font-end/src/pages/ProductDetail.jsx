@@ -17,7 +17,7 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
 
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.products.data);
   const user = useSelector((state) => state.user?.user);
 
   useEffect(() => {

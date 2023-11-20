@@ -13,7 +13,7 @@ import CartsList from './../components/Carts/CartsList';
 const Carts = () => {
   const dispatch = useDispatch();
   const { modal, openModal, closeModal } = useModal();
-  const cart = useSelector((state) => state.cart.cart);
+  const cart = useSelector((state) => state.cart?.data);
   const user = useSelector((state) => state.user?.user);
   const userId = user ? user._id : null;
 

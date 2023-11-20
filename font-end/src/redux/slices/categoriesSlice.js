@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, isFulfilled } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const getCategories = createAsyncThunk(
@@ -13,21 +13,24 @@ export const getCategories = createAsyncThunk(
 
 const categoriesSlice = createSlice({
   name: 'categories',
-  initialState: [],
+  initialState: { data: [], loading: false, error: null },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getCategories.fulfilled, (state, action) => {
-      if (JSON.stringify(state) !== JSON.stringify(action.payload)) {
-        return action.payload;
-      }
-      return state;
+    builder.addCase(getCategories.pending, (state) => {
+      state.loading = true;
     });
-    builder.addMatcher(isFulfilled, (state, action) => {
-      if (action.error) {
-        console.error(action.error);
+    builder.addCase(getCategories.fulfilled, (state, action) => {
+      state.loading = false;
+      if (JSON.stringify(state.data) !== JSON.stringify(action.payload)) {
+        state.data = action.payload;
       }
+    });
+    builder.addCase(getCategories.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
     });
   },
 });
+
 
 export default categoriesSlice.reducer;

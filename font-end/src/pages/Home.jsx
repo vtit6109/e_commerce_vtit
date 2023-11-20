@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Row } from 'antd';
+import { Col, Row, Spin, Alert } from 'antd';
 
-import { RiseOutlined, CheckOutlined, LikeOutlined } from '@ant-design/icons';
+import { RiseOutlined, CheckOutlined, LikeOutlined, LoadingOutlined  } from '@ant-design/icons';
 
 import { getCatalogs } from '../redux/slices/catalogsSlice';
 import { getAllProducts } from '../redux/slices/productsSlice';
@@ -20,32 +20,56 @@ const arrImages = [slider01, slider02, slider03];
 
 function Home() {
   const dispatch = useDispatch();
-  const catalogs = useSelector((state) => state.catalogs);
-  const { data, loading, error } = useSelector((state) => state.products);
+  const catalogs = useSelector((state) => state.catalogs.data);
+  const products = useSelector((state) => state.products.data);
+
+  const loading = useSelector((state) => state.catalogs.loading || state.products.loading);
+  const error = useSelector((state) => state.catalogs.error || state.products.error);
 
   useEffect(() => {
     dispatch(getCatalogs());
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  const bestSellerSorted = [...data].sort((a, b) => b.sold - a.sold);
+  const bestSellerSorted = [...products].sort((a, b) => b.sold - a.sold);
 
-  const favoritesSorted = [...data]
+  const favoritesSorted = [...products]
     .filter((product) => product.favoriteStar > 3)
     .sort((a, b) => b.favoriteStar - a.favoriteStar)
     .slice(0, 9);
 
-  const activeSorted = [...data]
+  const activeSorted = [...products]
     .filter((product) => product.active === true)
     .slice(0, 9);
 
-    console.log(data);
 
     if (loading) {
-      return <div>Loading...</div>;
+      return (
+        <>
+            <div className=''>
+              <Spin
+              indicator={
+                <LoadingOutlined
+                  style={{fontSize: 24,}}
+                    spin
+                  />
+                }
+              />
+            </div>
+        </>
+      )
     }
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return (
+        <>
+          <div className='flex justify-center items-center'> 
+            <Alert
+              message="Có lỗi xảy ra khi tải dữ liệu"
+              type="error"
+            />
+          </div>
+        </>
+      );
     }
 
   return (

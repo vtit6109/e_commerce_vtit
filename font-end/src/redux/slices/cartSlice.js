@@ -61,22 +61,62 @@ export const updateQuantity = createAsyncThunk(
   },
 );
 
-export const cartSlice = createSlice({
+const cartSlice = createSlice({
   name: 'cart',
-  initialState: { cart: {} },
+  initialState: { data: {}, loading: false, error: null },
   reducers: {},
   extraReducers: (builder) => {
+    //getCart-------
+    builder.addCase(getCart.pending, (state) => {
+      state.loading = true;
+    });
     builder.addCase(getCart.fulfilled, (state, action) => {
       state.cart = action.payload;
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(getCart.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    });
+    //addToCart-------
+    builder.addCase(addToCart.pending, (state) => {
+      state.loading = true;
     });
     builder.addCase(addToCart.fulfilled, (state, action) => {
       state.cart = action.payload;
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(addToCart.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    });
+    //removeFromCart-------
+    builder.addCase(removeFromCart.pending, (state) => {
+      state.loading = true;
     });
     builder.addCase(removeFromCart.fulfilled, (state, action) => {
       state.cart = action.payload;
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(removeFromCart.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    });
+    //updateQuantity-------
+    builder.addCase(updateQuantity.pending, (state) => {
+      state.loading = true;
     });
     builder.addCase(updateQuantity.fulfilled, (state, action) => {
       state.cart = action.payload;
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(updateQuantity.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
     });
   },
 });

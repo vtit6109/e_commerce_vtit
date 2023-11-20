@@ -113,6 +113,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState: {
     user: JSON.parse(sessionStorage.getItem('user')) || null,
+    loading: false,
     error: null,
   },
   reducers: {
@@ -126,49 +127,99 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    //registerUser------
+    builder.addCase(registerUser.pending, (state) => {
+      state.loading = true;
+    });
     builder.addCase(registerUser.fulfilled, (state, action) => {
       state.user = action.payload;
+      state.loading = false;
       state.error = null;
     });
     builder.addCase(registerUser.rejected, (state, action) => {
       state.user = null;
+      state.loading = false;
       state.error = action.payload;
+    });
+    //loginWithEmail------
+    builder.addCase(loginWithEmail.pending, (state) => {
+      state.loading = true;
     });
     builder.addCase(loginWithEmail.fulfilled, (state, action) => {
       state.user = action.payload;
+      state.loading = false;
       state.error = null;
     });
     builder.addCase(loginWithEmail.rejected, (state, action) => {
       state.user = null;
+      state.loading = false;
       state.error = action.payload;
+    });
+    //checkPhoneNumber------
+    builder.addCase(checkPhoneNumber.pending, (state) => {
+      state.loading = true;
     });
     builder.addCase(checkPhoneNumber.fulfilled, (state, action) => {
       state.user = action.payload;
+      state.loading = false;
       state.error = null;
     });
     builder.addCase(checkPhoneNumber.rejected, (state, action) => {
       state.user = null;
+      state.loading = false;
       state.error = action.payload;
+    });
+    //verifyCode------
+    builder.addCase(verifyCode.pending, (state) => {
+      state.loading = true;
     });
     builder.addCase(verifyCode.fulfilled, (state, action) => {
       state.user = action.payload;
+      state.loading = false;
       state.error = null;
     });
     builder.addCase(verifyCode.rejected, (state, action) => {
       state.user = null;
+      state.loading = false;
       state.error = action.payload;
+    });
+    //updateUserOnServer------
+    builder.addCase(updateUserOnServer.pending, (state) => {
+      state.loading = true;
     });
     builder.addCase(updateUserOnServer.fulfilled, (state, action) => {
       state.user = action.payload;
+      state.loading = false;
       sessionStorage.setItem('user', JSON.stringify(action.payload));
+    });
+    builder.addCase(updateUserOnServer.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    //addAddressOnServer------
+    builder.addCase(addAddressOnServer.pending, (state) => {
+      state.loading = true;
     });
     builder.addCase(addAddressOnServer.fulfilled, (state, action) => {
       state.user = action.payload;
+      state.loading = false;
       sessionStorage.setItem('user', JSON.stringify(action.payload));
     });
+    builder.addCase(addAddressOnServer.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    //deleteAddressOnServer------
+    builder.addCase(deleteAddressOnServer.pending, (state) => {
+      state.loading = true;
+    });
     builder.addCase(deleteAddressOnServer.fulfilled, (state, action) => {
-      state.user = null;
       state.user = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(deleteAddressOnServer.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     });
   },
 });

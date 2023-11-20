@@ -6,7 +6,7 @@ import { HomeOutlined } from '@ant-design/icons';
 
 const BreadcrumbComponent = () => {
   const { pathname: currentPath } = useLocation();
-  const categories = useSelector((state) => state.categories);
+  const categories = useSelector((state) => state.categories.data);
 
   const breadcrumbItems = useMemo(() => {
     if (currentPath === '/') return null;
