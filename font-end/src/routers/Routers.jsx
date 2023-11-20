@@ -17,13 +17,12 @@ import Order from '../components/AccountDetail/Order';
 import Review from '../components/AccountDetail/Review';
 import Wishlist from '../components/AccountDetail/Wishlist';
 import Carts from '../pages/Carts';
-// import TestZone from '../TestZone';
 
 const Loading = () => <div>Loading...</div>;
 
 const Routers = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.products.data);
   const [router, setRouter] = useState(null);
 
   useEffect(() => {
@@ -88,10 +87,6 @@ const Routers = () => {
             path: '/carts',
             element: <Carts />,
           },
-          // {
-          //   path: '/test',
-          //   element: <TestZone />,
-          // },
           {
             path: '*',
             element: products.length > 0 ? <PageNotFound /> : <Loading />,
