@@ -7,7 +7,7 @@ import { UserOutlined, CaretDownOutlined } from '@ant-design/icons';
 
 import { logoutUser } from '../../../redux/slices/userSlice';
 
-function LoginButton({ modal, openModal }) {
+const LoginButton = ({ modal, openModal }) => {
   const user = useSelector((state) => state.user?.user);
 
   const navigate = useNavigate();

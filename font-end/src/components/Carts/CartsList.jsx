@@ -1,18 +1,17 @@
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   removeFromCart,
   updateQuantity,
 } from '../../redux/slices/cartSlice';
-import { Table } from 'antd';
+import { Table, Skeleton } from 'antd';
 
 import {FaCheckCircle} from 'react-icons/fa'
 import {  CiTrash } from 'react-icons/ci';
 
-const CartsList = ( { userId } ) => {
+const CartsList = ( { userId, cartData, loading } ) => {
     const dispatch = useDispatch();
-    const cart = useSelector((state) => state.cart.cart);
 
     const handleRemoveFromCart = async (productId) => {
         await dispatch(removeFromCart({ userId, productId }));
@@ -114,9 +113,9 @@ const CartsList = ( { userId } ) => {
   ];
 
   const data =
-    cart &&
-    cart.products &&
-    cart.products.map((item) => ({
+    cartData &&
+    cartData.products &&
+    cartData.products.map((item) => ({
       product: item.productId.productName,
       active: item.productId.active,
       url: `/${item.productId?.category?.catalog?.url}/${item.productId?.category?.url}/${item.productId?._id}`,
@@ -134,6 +133,17 @@ const CartsList = ( { userId } ) => {
       });
     },
   };
+
+  if(loading){
+    return (
+      <>
+         <div>
+          <Skeleton active />
+        </div>
+      </>
+    )
+  }
+
   return (
     <>
      <Table
@@ -149,6 +159,8 @@ const CartsList = ( { userId } ) => {
 }
 CartsList.propTypes = {
     userId: PropTypes.string.isRequired,
+    cartData: PropTypes.object,
+    loading: PropTypes.bool
   };
   
 export default CartsList

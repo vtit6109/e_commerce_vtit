@@ -2,25 +2,26 @@ import { useState, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
-import { Col, Row } from 'antd';
+import { Col, Row, Alert } from 'antd';
 
 import ProductList from '../shared/ProductList';
 import FilterBarComponet from '../components/FilterBar/FilterBar';
 import Menu from '../shared/Menu';
 
-import { getCatalogs } from '../redux/slices/catalogsSlice';
 import { getCategories } from '../redux/slices/categoriesSlice';
 import { getCatalogProducts } from '../redux/slices/productsSlice';
 const Catalogs = () => {
   const dispatch = useDispatch();
   const currentUrl = useLocation().pathname.split('/')[1];
 
-  const catalogs = useSelector((state) => state.catalogs.data);
   const categories = useSelector((state) => state.categories.data);
   const products = useSelector((state) => state.products.data);
 
+  const loading = useSelector((state) => state.products.loading || state.catalogs.loading || state.categories.loading)
+  const error = useSelector((state) => state.products.error || state.catalogs.error || state.categories.error)
+
   useEffect(() => {
-    dispatch(getCatalogs());
+
     dispatch(getCategories());
     dispatch(getCatalogProducts(currentUrl));
   }, [dispatch, currentUrl]);
@@ -50,8 +51,17 @@ const Catalogs = () => {
     [products, selectedBrands],
   );
 
-  if (!catalogs || !products) {
-    return <div>Loading...</div>;
+  if (error){
+    return (
+    <>
+      <Alert
+        message="Error"
+        description="Đã có lỗi khi tải dữ liệu."
+        type="error"
+        showIcon
+    />
+    </>
+    )
   }
 
   return (
@@ -62,15 +72,17 @@ const Catalogs = () => {
             title={'Danh Mục Sản Phẩm'}
             data={currentCategory}
             pathType={'category'}
+            loading={loading}
           />
           <FilterBarComponet
             menu={currentCategory}
             data={products}
             onBrandFilter={handleBrandFilter}
+            loading={loading}
           />
         </Col>
         <Col className="rounded-[10px] shadow-sm bg-white" span={20}>
-          <ProductList itemsPerPage={6} data={filteredProducts} />
+          <ProductList itemsPerPage={6} data={filteredProducts} loading={loading} />
         </Col>
       </Row>
     </div>

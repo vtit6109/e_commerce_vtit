@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
+import { Skeleton } from 'antd';
 
 const getData = (data, pathType) => {
   if (pathType === 'catalog') {
@@ -19,9 +20,18 @@ const getData = (data, pathType) => {
   }
 };
 
-const MenubarComponent = ({ data, title, pathType }) => {
+const MenubarComponent = ({ data, title, pathType, loading }) => {
   const processData = getData(data, pathType);
-
+  
+  if(loading){
+    return (
+      <>
+         <div>
+          <Skeleton active />
+        </div>
+      </>
+    )
+  }
   return (
     <>
       <div className="bg-white text-lg text-left rounded-lg shadow-md">
@@ -38,8 +48,9 @@ const MenubarComponent = ({ data, title, pathType }) => {
 };
 MenubarComponent.propTypes = {
   data: PropTypes.array.isRequired,
-  title: PropTypes.string,
-  pathType: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  pathType: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default MenubarComponent;

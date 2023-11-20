@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Row, Spin, Alert } from 'antd';
+import { Col, Row, Alert } from 'antd';
 
-import { RiseOutlined, CheckOutlined, LikeOutlined, LoadingOutlined  } from '@ant-design/icons';
+import { RiseOutlined, CheckOutlined, LikeOutlined  } from '@ant-design/icons';
 
 import { getCatalogs } from '../redux/slices/catalogsSlice';
 import { getAllProducts } from '../redux/slices/productsSlice';
@@ -42,23 +42,6 @@ function Home() {
     .filter((product) => product.active === true)
     .slice(0, 9);
 
-
-    if (loading) {
-      return (
-        <>
-            <div className=''>
-              <Spin
-              indicator={
-                <LoadingOutlined
-                  style={{fontSize: 24,}}
-                    spin
-                  />
-                }
-              />
-            </div>
-        </>
-      )
-    }
     if (error) {
       return (
         <>
@@ -77,7 +60,7 @@ function Home() {
       <Row className="">
         <Col className="w-[230px] px-4" span={4}>
           <div className="">
-            <Menu title={'Danh Mục'} data={catalogs} pathType={'catalog'} />
+            <Menu title={'Danh Mục'} data={catalogs} pathType={'catalog'} loading={loading}/>
           </div>
         </Col>
         <Col className="" span={20}>
@@ -92,7 +75,7 @@ function Home() {
                 </span>
                 Sản Phẩm Bán Chạy
               </div>
-              <ProductShowMoreLess data={bestSellerSorted} />
+              <ProductShowMoreLess data={bestSellerSorted} loading={loading} />
             </li>
 
             <li className="bg-white my-4 p-4 rounded-lg shadow-md">
@@ -102,7 +85,7 @@ function Home() {
                 </span>
                 Đánh Giá Tốt Nhất
               </div>
-              <ProductCarousel data={favoritesSorted} />
+              <ProductCarousel data={favoritesSorted} loading={loading} />
             </li>
 
             <li className="bg-white my-4 p-4 rounded-lg shadow-md">
@@ -112,7 +95,7 @@ function Home() {
                 </span>
                 Được Xác Nhận
               </div>
-              <ProductCarousel data={activeSorted} />
+              <ProductCarousel data={activeSorted} loading={loading} />
             </li>
           </ul>
         </Col>

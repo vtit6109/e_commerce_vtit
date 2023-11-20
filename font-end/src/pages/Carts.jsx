@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getCart,
 } from '../redux/slices/cartSlice';
+
 
 import useModal from '../hooks/useModal';
 import LoginModal from '../components/modal/login/Login';
@@ -13,9 +13,11 @@ import CartsList from './../components/Carts/CartsList';
 const Carts = () => {
   const dispatch = useDispatch();
   const { modal, openModal, closeModal } = useModal();
-  const cart = useSelector((state) => state.cart?.data);
+  const cart = useSelector((state) => state.cart?.cart);
   const user = useSelector((state) => state.user?.user);
   const userId = user ? user._id : null;
+
+  const cartLoading = useSelector((state) => state.cart.loading)
 
   useEffect(() => {
     dispatch(getCart(userId));
@@ -47,13 +49,10 @@ const Carts = () => {
     );
   }
 
-  if (!cart) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="cursor-pointer">
-      <CartsList userId={userId} />
+      <CartsList cartData={cart} userId={userId} loading={cartLoading} />
     </div>
   );
 };

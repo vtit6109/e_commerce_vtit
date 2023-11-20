@@ -1,8 +1,18 @@
 import PropTypes from 'prop-types';
-
 import BrandCheckListComponent from './BrandCheckList';
+import {Skeleton} from 'antd';
 
-const FilterBarComponet = ({ data, onBrandFilter }) => {
+const FilterBarComponet = ({ data, loading, onBrandFilter }) => {
+
+  if(loading){
+    return (
+      <>
+         <div>
+          <Skeleton active />
+        </div>
+      </>
+    )
+  }
   return (
     <>
       <ul className="my-4">
@@ -16,6 +26,7 @@ const FilterBarComponet = ({ data, onBrandFilter }) => {
 
 FilterBarComponet.propTypes = {
   data: PropTypes.array.isRequired,
+  loading: PropTypes.bool,
   onBrandFilter: PropTypes.func,
 };
 

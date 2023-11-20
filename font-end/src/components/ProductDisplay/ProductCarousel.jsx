@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { Skeleton } from 'antd';
 import { Link } from 'react-router-dom';
 import {
   DoubleLeftOutlined,
@@ -9,7 +10,7 @@ import {
 
 import Card from '../../shared/Card';
 
-const ProductCarousel = ({ data }) => {
+const ProductCarousel = ({ data, loading }) => {
   const [productIndex, setProductIndex] = useState(0);
   const displayCount = 6;
 
@@ -20,7 +21,16 @@ const ProductCarousel = ({ data }) => {
       setProductIndex(productIndex + displayCount);
     }
   };
-
+    if (loading) {
+      return (
+        <>
+            <div>
+              <Skeleton active />
+            </div>
+        </>
+      )
+    }
+    
   return (
     <div>
       <div className="grid relative justify-center gap-x-2 gap-y-5 grid-cols-6 mx-4 p-4 border border-solid rounded transition-all duration-500 overflow-x-auto">
@@ -55,5 +65,6 @@ const ProductCarousel = ({ data }) => {
 };
 ProductCarousel.propTypes = {
   data: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 export default ProductCarousel;

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { Skeleton } from 'antd';
 import {
   CaretDownOutlined,
   CaretUpOutlined,
@@ -9,7 +9,8 @@ import {
 } from '@ant-design/icons';
 
 import Card from '../../shared/Card';
-const ProductShowMoreLess = ({ data }) => {
+
+const ProductShowMoreLess = ({ data, loading }) => {
   const [numProductsToShow, setNumProductsToShow] = useState(6);
   const [showLessButton, setShowLessButton] = useState(false);
 
@@ -22,6 +23,16 @@ const ProductShowMoreLess = ({ data }) => {
     setNumProductsToShow(6);
     setShowLessButton(false);
   };
+
+  if (loading) {
+    return (
+      <>
+          <div>
+            <Skeleton active />
+          </div>
+      </>
+    )
+  }
   return (
     <>
       <div
@@ -64,5 +75,6 @@ const ProductShowMoreLess = ({ data }) => {
 };
 ProductShowMoreLess.propTypes = {
   data: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 export default ProductShowMoreLess;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function useModal() {
+const useModal = () => {
   const [modal, setModal] = useState(null);
 
   function openModal(modalName) {

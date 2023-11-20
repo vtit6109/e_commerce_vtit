@@ -7,7 +7,7 @@ import { BiShow, BiHide } from '@react-icons/all-files/bi/BiShow';
 
 import { loginWithEmail } from '../../../redux/slices/userSlice';
 
-function LoginEmailModal({ isOpen, onClose, onSuccess }) {
+const LoginEmailModal = ({ isOpen, onClose, onSuccess }) => {
   const dispatch = useDispatch();
   const [useremail, setUseremail] = useState('');
   const [password, setPassword] = useState('');

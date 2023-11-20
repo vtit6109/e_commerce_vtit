@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { Pagination } from 'antd';
-import { Empty } from 'antd';
+import { Pagination, Skeleton, Empty } from 'antd';
 
 import Card from './Card';
 
-const ProductListComponent = ({ data, itemsPerPage }) => {
+const ProductListComponent = ({ data, itemsPerPage, loading }) => {
   // Add pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = itemsPerPage;
@@ -14,12 +13,20 @@ const ProductListComponent = ({ data, itemsPerPage }) => {
   const indexOfFirstItem = indexOfLastItem - perPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
+  if(loading){
+    return (
+      <>
+        <Skeleton/>
+      </>
+    )
+  }
+
   return (
     <>
       {currentItems.length > 0 ? (
         <>
           <div className="grid justify-center gap-x-2 gap-y-5 grid-cols-6 m-4 p-4 border-[1px] border-solid rounded-[10px]">
-            <Card productItems={currentItems} />
+            <Card productItems={currentItems} loading={loading} />
           </div>
           <div className="flex justify-center py-3">
             <Pagination
@@ -44,6 +51,7 @@ const ProductListComponent = ({ data, itemsPerPage }) => {
 ProductListComponent.propTypes = {
   data: PropTypes.array,
   itemsPerPage: PropTypes.number,
+  loading: PropTypes.bool,
 };
 
 export default ProductListComponent;

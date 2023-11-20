@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
-import { Col, Row } from 'antd';
+import { Col, Row, Skeleton } from 'antd';
 
 import ProductList from '../shared/ProductList';
 import FilterBarComponet from '../components/FilterBar/FilterBar';
@@ -11,8 +11,8 @@ import { getCategoryProducts } from '../redux/slices/productsSlice';
 
 const Categories = () => {
   const dispatch = useDispatch();
-
   const products = useSelector((state) => state.products.data);
+  const loading = useSelector((state) => state.products.loading)
 
   const currentUrlc = useLocation().pathname.split('/')[1];
   const currentUrl = useLocation().pathname.split('/')[2];
@@ -43,10 +43,15 @@ const Categories = () => {
     [products, selectedBrands],
   );
 
-  if (!products) {
-    return <div>Loading...</div>;
+  if(loading){
+    return (
+      <>
+         <div>
+          <Skeleton active />
+        </div>
+      </>
+    )
   }
-
   return (
     <div className=" bg-slate-100 ">
       <Row className="">
