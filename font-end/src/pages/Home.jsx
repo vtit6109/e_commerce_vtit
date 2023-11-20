@@ -21,23 +21,32 @@ const arrImages = [slider01, slider02, slider03];
 function Home() {
   const dispatch = useDispatch();
   const catalogs = useSelector((state) => state.catalogs);
-  const products = useSelector((state) => state.products);
+  const { data, loading, error } = useSelector((state) => state.products);
 
   useEffect(() => {
     dispatch(getCatalogs());
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  const bestSellerSorted = [...products].sort((a, b) => b.sold - a.sold);
+  const bestSellerSorted = [...data].sort((a, b) => b.sold - a.sold);
 
-  const favoritesSorted = [...products]
+  const favoritesSorted = [...data]
     .filter((product) => product.favoriteStar > 3)
     .sort((a, b) => b.favoriteStar - a.favoriteStar)
     .slice(0, 9);
 
-  const activeSorted = [...products]
+  const activeSorted = [...data]
     .filter((product) => product.active === true)
     .slice(0, 9);
+
+    console.log(data);
+
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    }
 
   return (
     <>
