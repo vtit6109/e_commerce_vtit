@@ -39,55 +39,67 @@ export const getSpecificProduct = createAsyncThunk(
 
 const productsSlice = createSlice({
   name: 'products',
-  initialState: [],
+  initialState: { data: [], loading: false, error: null },
   reducers: {},
   extraReducers: (builder) => {
+    //getAllProducts----------
+    builder.addCase(getAllProducts.pending, (state) => {
+      state.loading = true;
+    });
     builder.addCase(getAllProducts.fulfilled, (state, action) => {
-      if (JSON.stringify(state) !== JSON.stringify(action.payload)) {
-        return action.payload;
+      state.loading = false;
+      if (JSON.stringify(state.data) !== JSON.stringify(action.payload)) {
+        state.data = action.payload;
       }
-      return state;
     });
     builder.addCase(getAllProducts.rejected, (state, action) => {
-      if (action.error) {
-        console.error(action.error);
-      }
+      state.loading = false;
+      state.error = action.error;
     });
 
+    //getCatalogProducts-----------
+    builder.addCase(getCatalogProducts.pending, (state) => {
+      state.loading = true;
+    });
     builder.addCase(getCatalogProducts.fulfilled, (state, action) => {
-      if (JSON.stringify(state) !== JSON.stringify(action.payload)) {
-        return action.payload;
+      state.loading = false;
+      if (JSON.stringify(state.data) !== JSON.stringify(action.payload)) {
+        state.data = action.payload;
       }
-      return state;
     });
     builder.addCase(getCatalogProducts.rejected, (state, action) => {
-      if (action.error) {
-        console.error(action.error);
-      }
+      state.loading = false;
+      state.error = action.error;
     });
 
+     //getCategoryProducts--------------
+     builder.addCase(getCategoryProducts.pending, (state) => {
+      state.loading = true;
+    });
     builder.addCase(getCategoryProducts.fulfilled, (state, action) => {
-      if (JSON.stringify(state) !== JSON.stringify(action.payload)) {
-        return action.payload;
+      state.loading = false;
+      if (JSON.stringify(state.data) !== JSON.stringify(action.payload)) {
+        state.data = action.payload;
       }
-      return state;
     });
     builder.addCase(getCategoryProducts.rejected, (state, action) => {
-      if (action.error) {
-        console.error(action.error);
-      }
+      state.loading = false;
+      state.error = action.error;
     });
-
+    
+    //getSpecificProduct--------------
+    builder.addCase(getSpecificProduct.pending, (state) => {
+      state.loading = true;
+    });
     builder.addCase(getSpecificProduct.fulfilled, (state, action) => {
-      if (JSON.stringify(state) !== JSON.stringify(action.payload)) {
-        return action.payload;
+      state.loading = false;
+      if (JSON.stringify(state.data) !== JSON.stringify(action.payload)) {
+        state.data = action.payload;
       }
-      return state;
     });
     builder.addCase(getSpecificProduct.rejected, (state, action) => {
-      if (action.error) {
-        console.error(action.error);
-      }
+      state.loading = false;
+      state.error = action.error;
     });
   },
 });
