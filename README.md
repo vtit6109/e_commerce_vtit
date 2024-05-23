@@ -14,4 +14,4 @@ at the origin folder
 
 
 Live Demo : https://e-commerce-vtit.vercel.app/
-
+Demo account : user1@email.com , Pass : 123456
