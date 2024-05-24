@@ -7,7 +7,7 @@ at the origin folder
 - step 2 : run command `npm install`
 - step 3 : run cammand `npm run dev`
   
-**with font-end folder**.
+**with back-end folder**.
   at the origin folder
   - step 1 : `cd back-end`
 - step 2 : run command `npm install`
